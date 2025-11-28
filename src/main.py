@@ -14,12 +14,12 @@ def cls() -> None:
     
 def print_header():
     print("\n" + "="*60)
-    print(f"{Fore.CYAN}{Style.BRIGHT}{"GC CONTENT ANALYZER":^60}{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}{Style.BRIGHT}{'GC CONTENT ANALYZER':^60}{Style.RESET_ALL}")
     print("="*60 + "\n")
 
 def print_section(title):
     print(f"\n{Fore.YELLOW}{Style.BRIGHT}▶ {title}{Style.RESET_ALL}")
-    print(f"{Fore.YELLOW}{"─"*50}{Style.RESET_ALL}")
+    print(f"{Fore.YELLOW}{'─'*50}{Style.RESET_ALL}")
 
 def print_result(label, value, unit=""):
     print(f"{Fore.WHITE}  {label}: {Fore.GREEN}{Style.BRIGHT}{value}{unit}{Style.RESET_ALL}")
@@ -111,7 +111,7 @@ def main() -> None:
     cpg_islands_graph(cpgs, gpcs, seq_filename)
     
     print("\n" + "="*60)
-    print(f"{Fore.GREEN}{Style.BRIGHT}{"ANALYSIS COMPLETE":^60}{Style.RESET_ALL}")
+    print(f"{Fore.GREEN}{Style.BRIGHT}{'ANALYSIS COMPLETE':^60}{Style.RESET_ALL}")
     print("="*60 + "\n")
 
 if __name__ == "__main__":
