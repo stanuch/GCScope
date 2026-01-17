@@ -3,12 +3,12 @@
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=Python) 
 ![Status](https://img.shields.io/badge/status-functional-success)
 ![Stage](https://img.shields.io/badge/project-early_development-yellow)
-![Last Commit](https://img.shields.io/github/last-commit/stanuch/gc-content-analyzer)
+![Last Commit](https://img.shields.io/github/last-commit/stanuch/GCScope)
 
 ## Overview
 
 > [!NOTE]
-> GCScope is currently under **development**. The tool is as a learning project combining **bioinformatics and Python programming** and is being slowly, but gradually expanded with new functionality, next to my other projects.
+> This program is currently under **development**. The tool is as a learning project combining **bioinformatics and Python programming** and is being slowly, but gradually expanded with new functionality, next to my other projects.
 
 GCScope is a **lightweight bioinformatics tool written in Python for analyzing the GC content of DNA sequences provided in FASTA format**. 
 It computes both global GC percentage and local GC content using a sliding window approach. The app generates a graph of the GC content percentage across the sequence and calculates the CpG and GpC islands count per 100 nucleotides (*nt*) in the sequence.
