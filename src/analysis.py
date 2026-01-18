@@ -6,8 +6,9 @@ def gc_content(seq_path: str) -> float:
         for nucleotide in record.seq:
             if nucleotide in ["C", "G", "c", "g"]:
                 counter += 1
-        gc_content = (counter / len(record.seq)) * 100
-        return gc_content
+        gc_percent = (counter / len(record.seq)) * 100
+        return gc_percent
+    return 0.0
     
 def nucleotide_content(seq_path: str) -> dict:
     for record in SeqIO.parse(seq_path, "fasta"):
@@ -31,6 +32,7 @@ def nucleotide_content(seq_path: str) -> dict:
                 "C": (c_count / total) * 100,
                 "G": (g_count / total) * 100
             }
+    return {}
         
 def sliding_gc_content(seq_path: str, window_size: int, step_size: int) -> list:
     for record in SeqIO.parse(seq_path, "fasta"):
@@ -43,6 +45,7 @@ def sliding_gc_content(seq_path: str, window_size: int, step_size: int) -> list:
             temp_list_elem = [[i+1,i + window_size], gc_percent]
             gc_content.append(temp_list_elem)
         return gc_content
+    return []
 
 def cpg_islands(seq_path: str, step_size: int = 2, window_size: int = 100) -> list:
     for record in SeqIO.parse(seq_path, "fasta"):
@@ -55,6 +58,7 @@ def cpg_islands(seq_path: str, step_size: int = 2, window_size: int = 100) -> li
             temp_list_elem = [[i+1,i + window_size], int(cpg_count_per_100)]
             cpg.append(temp_list_elem)
         return cpg
+    return []
     
 def gpc_islands(seq_path: str, step_size: int = 2, window_size: int = 100) -> list:
     for record in SeqIO.parse(seq_path, "fasta"):
@@ -67,3 +71,4 @@ def gpc_islands(seq_path: str, step_size: int = 2, window_size: int = 100) -> li
             temp_list_elem = [[i+1, i + current_window_size], int(gpc_count_per_100)]
             gpc.append(temp_list_elem)
         return gpc
+    return []

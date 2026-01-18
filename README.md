@@ -9,7 +9,7 @@ It computes both global GC percentage and local GC content using a sliding windo
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=Python) 
 ![Status](https://img.shields.io/badge/status-functional-success)
 ![Stage](https://img.shields.io/badge/project-early_development-yellow)
-![Last Commit](https://img.shields.io/github/last-commit/stanuch/gcscope)
+![Last Commit](https://img.shields.io/github/last-commit/stanuch/GCScope)
 
 
 
