@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/gcscope_logo.png" alt="GCScope Logo" width="500">
+  <img src="docs/images/gcscope_logo.png" alt="GCScope Logo" width="600">
 </p>
 
 GCScope is a lightweight bioinformatics tool written in Python for analyzing the GC content of DNA sequences provided in FASTA format. 
