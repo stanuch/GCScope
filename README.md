@@ -29,7 +29,7 @@ It computes both global GC percentage and local GC content using a sliding windo
 **CpG and GpC Island Counts** - This visualization highlights the frequency of CpG and GpC dinucleotides across the sequence (The CpG sites or CG sites are regions of DNA where a cytosine nucleotide is followed by a guanine nucleotide in the linear sequence of bases). The chart shows the number of CpG and GpC islands per 100 nucleotides, providing a quick overview of methylation-related hotspots or GC-rich motifs. Such patterns can be useful in epigenetic analysis or identifying promoter regions.
 
 <p align="center">
-  <img width="680" height="280" alt="cpg counts" src="docs/images/cpg_and_gpc_counts_across_sequence.png" />
+  <img width="680" height="280" alt="cpg counts" src="docs/images/CpG_and_GpC_counts_across_sequence.png" />
 </p>
 
 **Nucleotide Composition Summary** - The program also generates a Nucleotide Composition Summary, which visualizes the overall proportion of each nucleotide type (*A, C, T, and G*) in the analyzed sequence. This bar chart provides a quick overview of the global composition balance and highlights potential biases or sequence characteristics.
@@ -39,15 +39,15 @@ It computes both global GC percentage and local GC content using a sliding windo
 ## How to use
 **1. Clone the repository:**
 ```bash
-git clone https://github.com/stanuch/seq-global-align.git
-cd dna-global-align
+git clone https://github.com/stanuch/GCScope.git
+cd GCScope
 ```
 **2. Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 **3. Prepare your FASTA file**
-- Place your sequence files in the /sequences folder
+- Place your sequence files in the [`sequences/`](sequences/) folder
 - Use the .fasta format
 - When running the program, enter only the file name without the extension (e.g., for seq1.fasta, just type seq1)
 
