@@ -23,18 +23,18 @@ It computes both global GC percentage and local GC content using a sliding windo
 **GC Content Across Sequence** - This plot shows the local GC content percentage along the analyzed DNA sequence. The X-axis represents nucleotide position. The Y-axis shows the GC ratio within a sliding window. The color intensity corresponds to GC richness - brighter regions indicate higher GC concentration, which can correlate with gene-dense or regulatory regions.
 
 <p align="center">
-  <img width="680" height="280" alt="gc content" src="docs/images/gc_content_across_sequence.png" />
+  <img width="680" height="280" alt="gc content" src="img/gc_content_across_sequence.png" />
 </p>
 
 **CpG and GpC Island Counts** - This visualization highlights the frequency of CpG and GpC dinucleotides across the sequence (The CpG sites or CG sites are regions of DNA where a cytosine nucleotide is followed by a guanine nucleotide in the linear sequence of bases). The chart shows the number of CpG and GpC islands per 100 nucleotides, providing a quick overview of methylation-related hotspots or GC-rich motifs. Such patterns can be useful in epigenetic analysis or identifying promoter regions.
 
 <p align="center">
-  <img width="680" height="280" alt="cpg counts" src="docs/images/CpG_and_GpC_counts_across_sequence.png" />
+  <img width="680" height="280" alt="cpg counts" src="img/CpG_and_GpC_counts_across_sequence.png" />
 </p>
 
 **Nucleotide Composition Summary** - The program also generates a Nucleotide Composition Summary, which visualizes the overall proportion of each nucleotide type (*A, C, T, and G*) in the analyzed sequence. This bar chart provides a quick overview of the global composition balance and highlights potential biases or sequence characteristics.
 
-<p align="center"> <img alt="ACTG Nucleotides percentage shown as a bars" src="docs/images/nucleotide_composition.png" /> </p>
+<p align="center"> <img alt="ACTG Nucleotides percentage shown as a bars" src="img/nucleotide_composition.png" /> </p>
 
 ## How to use
 **1. Clone the repository:**
