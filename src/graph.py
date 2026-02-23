@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 from pathlib import Path
-from datetime import datetime
 
 def create_x_values(gc_list: list) -> list:
     x = []
@@ -14,37 +13,36 @@ def create_y_values(gc_list: list) -> list:
         y.append(elem[1])
     return y
 
-def gc_content_graph(x: list, y: list, filename: str) -> tuple:
+def gc_content_graph(x: list, y: list, filename: str, output_dir: Path = None) -> tuple:
     fig, ax = plt.subplots()
     fig.set_size_inches(12, 5)
 
     norm = plt.Normalize(vmin=0, vmax=100)
     colors = plt.cm.inferno(norm(y))
-    
+
     for i in range(len(x) - 1):
         ax.fill_between(x[i:i+2], 0, y[i:i+2], color=colors[i])
-    
+
     ax.set_xlabel("Nucleotide Position", fontweight="bold")
     ax.set_ylabel("GC Content (%)", fontweight="bold")
     ax.set_title(f"GC Content Across Sequence: {filename}", fontweight="bold")
     ax.set(xlim=(min(x), max(x)), ylim=(0, 100))
-    
+
     sm = plt.cm.ScalarMappable(cmap="inferno", norm=norm)
     sm.set_array([])
     plt.colorbar(sm, ax=ax, label="GC Content (%)")
     ax.grid(alpha=0.4)
 
-    datetime_str = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_filename = f"gc_content_percent_{filename}_{datetime_str}.png"
-    output_dir = Path("../output")
-    output_dir.mkdir(exist_ok=True)
-    save_path = output_dir / output_filename
+    if output_dir is None:
+        output_dir = Path("../output")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    save_path = output_dir / f"gc_content_percent_{filename}.png"
     fig.savefig(save_path, dpi=300, bbox_inches="tight")
-    
+
     plt.show()
     return fig, ax
 
-def cpg_islands_graph(cpg_counts: list, gpc_counts: list, filename: str) -> tuple:
+def cpg_islands_graph(cpg_counts: list, gpc_counts: list, filename: str, output_dir: Path = None) -> tuple:
     fig, ax = plt.subplots()
     fig.set_size_inches(12, 5)
 
@@ -53,7 +51,7 @@ def cpg_islands_graph(cpg_counts: list, gpc_counts: list, filename: str) -> tupl
 
     x_gpc = [elem[0][0] for elem in gpc_counts]
     y_gpc = [elem[1] for elem in gpc_counts]
-    
+
     ax.plot(x_cpg, y_cpg, color="darkblue", label="CpG")
     ax.plot(x_gpc, y_gpc, color="orange", label="GpC")
 
@@ -66,12 +64,11 @@ def cpg_islands_graph(cpg_counts: list, gpc_counts: list, filename: str) -> tupl
     ax.legend(loc="upper right", fontsize=11, framealpha=0.9)
     ax.grid(alpha=0.4)
 
-    datetime_str = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_filename = f"cpg_islands_graph_{filename}_{datetime_str}.png"
-    output_dir = Path("../output")
-    output_dir.mkdir(exist_ok=True)
-    save_path = output_dir / output_filename
+    if output_dir is None:
+        output_dir = Path("../output")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    save_path = output_dir / f"cpg_islands_graph_{filename}.png"
     fig.savefig(save_path, dpi=300, bbox_inches="tight")
-    
+
     plt.show()
     return fig, ax

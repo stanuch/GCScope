@@ -1,9 +1,11 @@
 import os
+from pathlib import Path
+from datetime import datetime
 from Bio import SeqIO
 from colorama import Fore, Back, Style, init
 from analysis import gc_content, nucleotide_content, sliding_gc_content, cpg_islands, gpc_islands
 from graph import create_x_values, create_y_values, gc_content_graph, cpg_islands_graph
-from analysis import gc_content, nucleotide_content, sliding_gc_content, cpg_islands, gpc_islands
+from export import export_results
 
 def get_file_path(base_dir: str, filename: str) -> str:
     seq_dir = os.path.join(base_dir, "..", "sequences")
@@ -32,7 +34,7 @@ def print_success(message):
 
 def get_styled_input(prompt, default=None):
     if default:
-        full_prompt = f"{Fore.CYAN}➤ {prompt} [{Fore.YELLOW}default: {default}{Fore.CYAN}]: {Style.RESET_ALL}"
+        full_prompt = f"{Fore.CYAN}➤ {prompt} [{Fore.YELLOW}Enter = {default}{Fore.CYAN}]: {Style.RESET_ALL}"
     else:
         full_prompt = f"{Fore.CYAN}➤ {prompt}: {Style.RESET_ALL}"
     return input(full_prompt)
@@ -58,6 +60,12 @@ def main() -> None:
         return
     
     print_success(f"File loaded: {seq_filename}")
+
+    datetime_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    run_output_dir = Path(base_dir) / ".." / "output" / f"{seq_filename}_{datetime_str}"
+    run_output_dir.mkdir(parents=True, exist_ok=True)
+    print_result("Output folder", str(run_output_dir.resolve()))
     
     print_section("SEQUENCE STATISTICS")
     seq_length = len(next(SeqIO.parse(seq_path, "fasta")).seq)
@@ -102,17 +110,42 @@ def main() -> None:
     print(f"\n{Fore.CYAN}  Generating GC content graph...{Style.RESET_ALL}")
     gc_list = sliding_gc_content(seq_path, window_size, step_size)
     x, y = create_x_values(gc_list), create_y_values(gc_list)
-    gc_content_graph(x, y, seq_filename)
+    gc_content_graph(x, y, seq_filename, output_dir=run_output_dir)
 
     print_section("CPG ISLANDS ANALYSIS")
     print(f"{Fore.CYAN}  Analyzing CpG and GpC islands...{Style.RESET_ALL}")
     cpgs = cpg_islands(seq_path)
     gpcs = gpc_islands(seq_path)
-    cpg_islands_graph(cpgs, gpcs, seq_filename)
+    cpg_islands_graph(cpgs, gpcs, seq_filename, output_dir=run_output_dir)
     
     print("\n" + "="*60)
     print(f"{Fore.GREEN}{Style.BRIGHT}{'ANALYSIS COMPLETE':^60}{Style.RESET_ALL}")
     print("="*60 + "\n")
+
+    print_section("DATA EXPORT")
+    export_choice = get_styled_input("Export results to a file? (yes/no)", "no").strip().lower()
+
+    if export_choice in ("yes", "y"):
+        fmt = get_styled_input("Choose format — csv, tsv, or json", "csv").strip().lower() or "csv"
+        try:
+            saved_path = export_results(
+                seq_name=seq_filename,
+                seq_length=seq_length,
+                gc_percent=gc_percent,
+                nuc_content=nuc_content,
+                gc_list=gc_list,
+                cpg_list=cpgs,
+                gpc_list=gpcs,
+                window_size=window_size,
+                step_size=step_size,
+                output_dir=run_output_dir,
+                export_format=fmt,
+            )
+            print_success(f"Results exported to: {saved_path}")
+        except ValueError as e:
+            print_error(str(e))
+    else:
+        print(f"{Fore.WHITE}  Skipping export.{Style.RESET_ALL}")
 
 if __name__ == "__main__":
     main()
